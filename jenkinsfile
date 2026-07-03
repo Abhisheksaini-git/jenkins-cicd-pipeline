@@ -1,0 +1,106 @@
+pipeline {
+
+    agent any
+
+    tools {
+        jdk 'JDK17'
+        maven 'Maven3'
+    }
+
+    environment {
+
+        IMAGE_NAME = "abhishekkhub/myapp"
+
+    }
+
+    stages {
+
+        stage('Checkout') {
+
+            steps {
+
+                checkout scm
+
+            }
+
+        }
+
+        stage('Build') {
+
+            steps {
+
+                bat 'mvn clean package'
+
+            }
+
+        }
+
+        stage('Unit Test') {
+
+            steps {
+
+                bat 'mvn test'
+
+            }
+
+        }
+
+        stage('Docker Build') {
+
+            steps {
+
+                bat 'docker build -t %IMAGE_NAME%:latest .'
+
+            }
+
+        }
+
+        stage('Docker Login') {
+
+            steps {
+
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+
+                    bat 'echo %PASS% | docker login -u %USER% --password-stdin'
+
+                }
+
+            }
+
+        }
+
+        stage('Docker Push') {
+
+            steps {
+
+                bat 'docker push %IMAGE_NAME%:latest'
+
+            }
+
+        }
+
+    }
+
+    post {
+
+        always {
+
+            cleanWs()
+
+        }
+
+        success {
+
+            echo 'Pipeline Executed Successfully'
+
+        }
+
+        failure {
+
+            echo 'Pipeline Failed'
+
+        }
+
+    }
+
+}
