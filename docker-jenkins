@@ -1,0 +1,15 @@
+# Official Jenkins LTS image ko base banayein
+FROM jenkins/jenkins:lts
+
+# Naye packages install karne ke liye root user switch karein
+USER root
+
+# System update karein aur Docker CLI install karein
+RUN apt-get update && \
+    apt-get install -y docker.io
+
+# Jenkins user ko Docker group mein add karein taaki permission error na aaye
+RUN usermod -aG docker jenkins
+
+# Security best practice: Wapas jenkins user par switch karein
+USER jenkins

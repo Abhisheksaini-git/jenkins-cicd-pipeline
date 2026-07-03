@@ -55,6 +55,18 @@ pipeline {
 
         }
 
+
+        stage('Trivy FileSystem Scan') {
+    steps {
+        bat 'trivy fs .'
+    }
+}
+
+stage('Trivy Image Scan') {
+    steps {
+        bat 'trivy image %IMAGE_NAME%:latest'
+    }
+}
         stage('Docker Login') {
 
             steps {
