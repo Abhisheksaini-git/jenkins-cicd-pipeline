@@ -64,7 +64,7 @@ pipeline {
 
 stage('Trivy Image Scan') {
             steps {
-                sh "trivy image ${IMAGE_NAME}:latest"
+                sh "trivy image --no-progress --timeout 15m ${IMAGE_NAME}:latest"
             }
         }
         stage('Docker Login') {
