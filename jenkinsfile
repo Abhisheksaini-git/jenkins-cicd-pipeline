@@ -92,6 +92,17 @@ stage('Trivy Image Scan') {
         }
 
     }
+stage('Deploy to Kubernetes') {
+
+    steps {
+
+        bat 'kubectl apply -f kubernetes/deployment.yaml'
+
+        bat 'kubectl apply -f kubernetes/service.yaml'
+
+    }
+
+}
 
     post {
 
