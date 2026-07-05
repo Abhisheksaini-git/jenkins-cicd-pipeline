@@ -6,42 +6,77 @@ The pipeline automatically builds, tests, scans, containerizes, publishes Docker
 
 This project follows industry-standard DevOps practices and simulates a production-ready software delivery workflow.
 
-# 🏗️ Architecture
+# 🚀 CI/CD Pipeline Workflow
 
-                   Developer
-                       │
-                       ▼
-              GitHub Repository
-                       │
-                       ▼
-               GitHub Webhook
-                       │
-                       ▼
-              Jenkins Pipeline
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   Source Checkout   Maven Build   Unit Testing
-                       │
-                       ▼
-              Trivy File System Scan
-                       │
-                       ▼
-                 Docker Build
-                       │
-                       ▼
-               Trivy Image Scan
-                       │
-                       ▼
-                Push to Docker Hub
-                       │
-                       ▼
-             Kubernetes Deployment
-                       │
-                       ▼
-             Kubernetes Cluster
-                       │
-                       ▼
-             Application Running
+```text
++-----------+
+| Developer |
++-----------+
+      |
+      v
++-------------------+
+| GitHub Repository |
++-------------------+
+      |
+      v
++------------------+
+| GitHub Webhook   |
++------------------+
+      |
+      v
++------------------+
+| Jenkins Pipeline |
++------------------+
+      |
+      v
++------------------+
+| Checkout Source  |
++------------------+
+      |
+      v
++------------------+
+| Maven Build      |
++------------------+
+      |
+      v
++------------------+
+| Unit Testing     |
++------------------+
+      |
+      v
++----------------------+
+| Trivy FS Scan        |
++----------------------+
+      |
+      v
++----------------------+
+| Docker Image Build   |
++----------------------+
+      |
+      v
++----------------------+
+| Trivy Image Scan     |
++----------------------+
+      |
+      v
++----------------------+
+| Push to Docker Hub   |
++----------------------+
+      |
+      v
++----------------------+
+| Deploy to Kubernetes |
++----------------------+
+      |
+      v
++----------------------+
+| Kubernetes Cluster   |
++----------------------+
+      |
+      v
++----------------------+
+| Application Running  |
++----------------------+
+```
 
 - Enterprise CI/CD Pipeline using Jenkins, Docker, Docker Hub, Kubernetes, Trivy and GitHub Actions for automated deployment.
