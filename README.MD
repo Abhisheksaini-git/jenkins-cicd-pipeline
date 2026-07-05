@@ -8,33 +8,40 @@ This project follows industry-standard DevOps practices and simulates a producti
 
 # 🏗️ Architecture
 
-Developer
-│
-▼
-GitHub Repository
-│
-▼
-GitHub Webhook
-│
-▼
-Jenkins Pipeline
-│
-├── Source Code Checkout
-├── Maven Build
-├── Unit Testing
-├── Trivy File System Scan
-├── Docker Build
-├── Trivy Image Scan
-├── Docker Push
-└── Kubernetes Deployment
-│
-▼
-Docker Hub
-│
-▼
-Kubernetes Cluster
-│
-▼
-Application Running
+                   Developer
+                       │
+                       ▼
+              GitHub Repository
+                       │
+                       ▼
+               GitHub Webhook
+                       │
+                       ▼
+              Jenkins Pipeline
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+   Source Checkout   Maven Build   Unit Testing
+                       │
+                       ▼
+              Trivy File System Scan
+                       │
+                       ▼
+                 Docker Build
+                       │
+                       ▼
+               Trivy Image Scan
+                       │
+                       ▼
+                Push to Docker Hub
+                       │
+                       ▼
+             Kubernetes Deployment
+                       │
+                       ▼
+             Kubernetes Cluster
+                       │
+                       ▼
+             Application Running
 
 - Enterprise CI/CD Pipeline using Jenkins, Docker, Docker Hub, Kubernetes, Trivy and GitHub Actions for automated deployment.
